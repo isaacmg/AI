@@ -5,15 +5,15 @@ model = gensim.models.Word2Vec.load_word2vec_format('GoogleNews-vectors-negative
 with open('validation_set.tsv', 'r') as tsvin, open ('new.csv', 'w') as csvout:
     tsvin = csv.reader(tsvin, delimiter='\t')
     #csvout = csv.writer(csvout)
-    
+    #For each question in the psread sheet.
     for row in tsvin:
-        
+        # Average for question
         avgQ = 0
         for word in row[1].split():
             if word not in model: continue
             avgQ = avgQ + model[word]
         avgQ = avgQ/len(row[1].split())
-        
+        #Averages for answers 
         avgA = 0
         for word in row[2].split():
             if word not in model: continue
